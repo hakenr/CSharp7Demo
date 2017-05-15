@@ -52,22 +52,21 @@ namespace CSharp7Demo
 			}
 			//else
 			//{
-			if (storage is UsbKey usbKey && usbKey.IsPluggedIn)
+			if ((storage is UsbKey usbKey) && usbKey.IsPluggedIn)
 				{
 					usbKey.Unload();
 					Console.WriteLine("USB Drive Unloaded.");
 				}
-				else if (storage is DVD dvd && dvd.IsInserted)
+				else if ((storage is DVD dvd) && dvd.IsInserted)
 				{
 					// ...
 				}
 			//}
-			//Console.WriteLine(usbKey);
 		}
 
 		public static void Eject_WithPatternMatching_Switch(object storage)
 		{
-			switch (storage)
+			switch (storage) // C# 7.0 - "switch to anything"
 			{
 				case int s :
 					return;
