@@ -5,17 +5,10 @@ namespace CSharp7Demo
 {
 	public static class Tuples
 	{
-		public static void Demo()
-		{
-			Demo1();
-			Demo2();
-			Demo3();
-		}
-
-		// Error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found.Are you missing a reference?
+		// Error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type
+		// 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found.Are you missing a reference?
 		// --> Nainstalovat NuGet balíček System.ValueType
-
-		// Warning SA1008: Opening parenthesis must not be preceded by a space.
+		// --> nebo .NET 4.7 !!
 
 		public static (string, string, string) SplitPath(string path)
 		{
@@ -26,7 +19,7 @@ namespace CSharp7Demo
 				);
 		}
 
-		public static (string DirectoryName, string FileName, string Extension) SplitPath2(string path)
+		public static (string DirectoryName, string FileName, string Extension) SplitPathWithNames(string path)
 		{
 			return (
 				System.IO.Path.GetDirectoryName(path),
@@ -35,33 +28,37 @@ namespace CSharp7Demo
 				);
 		}
 
-		public static void Demo1()
+		public static void Demo()
 		{
 			var pathData1 = SplitPath(@"D:\Temp\MyFile.txt");
-			var pathData2 = SplitPath2(@"D:\Temp\MyFile.txt");
+			var pathData2 = SplitPathWithNames(@"D:\Temp\MyFile.txt");
 			
-			Console.WriteLine(pathData1.Equals(pathData2));
+			Console.WriteLine(pathData1.Equals(pathData2));							// true
 
-			Console.WriteLine(pathData1.GetType());
-			//Console.WriteLine(pathData1.GetType().GetProperties().Count());
-			//pathData1.GetType().GetFields().ToList().ForEach(Console.WriteLine);
+			Console.WriteLine(pathData1.GetType());									// System.ValueTuple<string, string, string>
+			Console.WriteLine(pathData1.GetType().GetProperties().Count());			// 0 - jsou to fieldy, ne properties
+			pathData1.GetType().GetFields().ToList().ForEach(Console.WriteLine);	// Item1, Item2, Item3
 
-			//Console.WriteLine(pathData2.GetType());
-			//Console.WriteLine(pathData2.GetType().GetProperties().Count());
-			//pathData2.GetType().GetFields().ToList().ForEach(Console.WriteLine);
+			Console.WriteLine(pathData2.GetType());									// stejné jako pathData1
+			Console.WriteLine(pathData2.GetType().GetProperties().Count());			// stejné jako pathData1
+			pathData2.GetType().GetFields().ToList().ForEach(Console.WriteLine);	// stejné jako pathData1
 
-			pathData2 = pathData1;			
-		}
+			pathData2 = pathData1;
 
-		public static void Demo2()
-		{
-			(string DirectoryName, string extension, string filename) pathData2 = SplitPath(@"D:\Temp\MyFile.txt");
-			Console.WriteLine(pathData2);
-		}
+			pathData1 = (@"C:\Wow", "Blah", "txt");
 
-		public static void Demo3()
-		{
-			var (directoryName, fileName, extension) = SplitPath2(@"D:\Temp\MyFile.txt");
+			var pathData3 = (DirectoryName: @"C:\Hah", FileName: "Daah", Extension: "cs");
+
+			pathData1 = pathData3;
+
+			// pozor na přeházení pořadí !!
+			(string DirectoryName, string extension, string filename) pathData4 = SplitPath(@"D:\Temp\MyFile.txt");
+			Console.WriteLine(pathData4.extension); // "MyFile"
+			(string DirectoryName, string extension, string filename) pathData5 = SplitPathWithNames(@"D:\Temp\MyFile.txt");
+			Console.WriteLine(pathData4.extension); // "MyFile"
+
+			// deconstruction
+			var (directoryName, fileName, extension) = SplitPathWithNames(@"D:\Temp\MyFile.txt");
 			Console.WriteLine(directoryName);
 		}
 	}
