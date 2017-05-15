@@ -10,18 +10,18 @@ namespace CSharp7Demo
 	{
 		public static void Demo()
 		{
-			string s = "aaa";
-			bool b;
-			if (b = int.TryParse(s, out int i))
+			string s = "0b100";
+
+			if (int.TryParse(s, out int i))
 			{
 				Console.WriteLine(i);
 			}
-			Console.WriteLine(i);
+			Console.WriteLine(i); // scope
 
-			//if (int.TryParse(s, out var i))
-			//{
-			//	Console.WriteLine(i);
-			//}
+			if (int.TryParse(s, out var j))
+			{
+				Console.WriteLine(j);
+			}
 		}
 	}
 }

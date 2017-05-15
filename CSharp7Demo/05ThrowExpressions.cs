@@ -8,6 +8,12 @@ namespace CSharp7Demo
 {
 	public class ThrowExpressions
 	{
-		public string FullName => "" ?? throw new NotImplementedException();
+		public string FullName
+		{
+			set => _fullName = value ?? throw new ArgumentNullException();
+			get => _fullName ?? throw new InvalidOperationException();
+		}
+
+		private string _fullName;
 	}
 }

@@ -19,7 +19,7 @@ namespace CSharp7Demo
 				);
 		}
 
-		public static (string DirectoryName, string FileName, string Extension) SplitPathWithNames(string path)
+		public static (string directoryName, string fileName, string extension) SplitPathWithNames(string path)
 		{
 			return (
 				System.IO.Path.GetDirectoryName(path),
@@ -47,7 +47,7 @@ namespace CSharp7Demo
 
 			pathData1 = (@"C:\Wow", "Blah", "txt");
 
-			var pathData3 = (DirectoryName: @"C:\Hah", FileName: "Daah", Extension: "cs");
+			var pathData3 = (directoryName: @"C:\Hah", fileName: "Daah", extension: "cs");
 
 			pathData1 = pathData3;
 
