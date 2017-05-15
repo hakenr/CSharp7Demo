@@ -33,6 +33,8 @@ namespace CSharp7Demo
 			ri = 5;
 			Console.WriteLine(i);
 			Console.WriteLine(x);
+			
+			
 			//int[] array = { 1, 2, 3, 4, 5, 6, 7 };
 			//ref int place = ref array[4];//(4, array); // aliases 7's place in the array
 			//array[4] = 555;

@@ -23,8 +23,9 @@ namespace CSharp7Demo
 			}
 			else
 			{
-				return await Task.Run<long>(() => Directory.GetFiles(path, searchPattern,
-					SearchOption.AllDirectories).Sum(t => (new FileInfo(t).Length)));
+				return await Task.Run<long>(() =>
+									Directory.GetFiles(path, searchPattern, SearchOption.AllDirectories)
+										.Sum(t => (new FileInfo(t).Length)));
 			}
 		}
 	}
