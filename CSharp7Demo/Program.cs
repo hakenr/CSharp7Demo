@@ -10,12 +10,12 @@ namespace CSharp7Demo
 	{
 		public static void Main(string[] args)
 		{
-			//BinaryLiterals.Demo();
-			//DigitSeparators.Demo();
-			//OutVariables.Demo();
-			//LocalFunctions.Demo();
-			//Tuples.Demo();
-			//PatternMatching.Demo();
+			BinaryLiterals.Demo();
+			DigitSeparators.Demo();
+			OutVariables.Demo();
+			LocalFunctions.Demo();
+			Tuples.Demo();
+			PatternMatching.Demo();
 			RefReturn.Demo();
 		}
 	}
